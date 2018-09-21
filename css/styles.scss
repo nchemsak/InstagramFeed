@@ -1,0 +1,181 @@
+
+///////////////////// RESPONSIVE SIZES FOR REFERENCE  \\\\\\\\\\\\\\\\\\\\\\\\\
+// xs: 0
+// sm: 576px
+// md: 768px
+// lg: 992px
+// xl: 1200px
+// @include media-breakpoint-up(sm) {}
+// @include media-breakpoint-up(md) {}
+// @include media-breakpoint-up(lg) {}
+// @include media-breakpoint-up(xl) {}
+
+
+///////////////////////// VARIABLE OVERRIDES  \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+$body-bg: #fff;
+$body-color: #999;
+
+$color-tan: #998d63;
+$color-light-tan: #ebe8e1;
+$color-grey: #858585;
+$primary-color: rgba(83, 83, 83, .9);
+
+$body-font-size: 18px;
+$body-line-height: 30px;
+
+$h1-size: 64px;
+$h2-size: 64px;
+$h3-size: 43px;
+$h4-size: 28px;
+$h5-size: 18px;
+
+$main-font: 'Nunito Sans',
+sans-serif;
+
+
+
+/////////////////////// CUSTOM MIXINS  \\\\\\\\\\\\\\\\\\\\\\\
+@mixin easeOut {
+    transition: all .4s cubic-bezier(0.23, 1, 0.32, 1);
+    -webkit-backface-visibility: hidden;
+}
+
+@mixin tablet {
+    @media screen and (max-width: 768px) {
+        @content;
+    }
+}
+
+///////////////////// IMPORT PREDEFINED BOOTSTRAP MIXINS  \\\\\\\\\\\\\\\\\\\\\\
+@import "../lib/bootstrap-4.0.0/scss/functions";
+@import "../lib/bootstrap-4.0.0/scss/variables";
+@import "../lib/bootstrap-4.0.0/scss/mixins";
+@import "../lib/bootstrap-4.0.0/scss/grid";
+
+
+// INSTAGRAM CSS BELOW
+$insta-wrapper-max-width: 965px;
+$insta-wrapper-min-height: 100px;
+$transition: all .17s cubic-bezier(.4, 0, 1, 1);
+$height: 100%;
+$width: 100%;
+
+
+
+.image-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    flex-flow: row wrap;
+    flex-grow: 1;
+    justify-content: space-around;
+    margin: 0 auto 24px;
+    max-width: $insta-wrapper-max-width;
+    min-height: $insta-wrapper-min-height;
+    position: relative;
+    width: $width;
+}
+
+.image-item {
+    animation: slide-item .3s ease forwards;
+    box-sizing: border-box;
+    flex: 1 0 33%;
+    transform: translateY(250px);
+    visibility: hidden;
+    width: $width;
+    @for $i from 1 through 10 {
+        &:nth-child(#{$i}) {
+            animation-delay: (#{$i * .1s});
+        }
+    }
+}
+
+.insta-page {
+    padding: 12px;
+}
+
+#instafeed {
+    .image {
+        display: block;
+        position: relative;
+        transition: $transition;
+        width: $width;
+        img {
+            display: block;
+            max-width: $width;
+            margin: 0 auto;
+            width: 100%;
+            border: 2px solid black;
+            border-radius: 5px;
+        }
+    }
+}
+
+@keyframes slide-item {
+    60% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+}
+
+@keyframes fadeIn {
+
+    0% {
+        transform: translateX(-150px);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+
+.img-backdrop {
+    background-image: linear-gradient(135deg, #0091ba 0%, #014f66 100%);
+    display: none;
+    flex-flow: column wrap;
+    height: 100%;
+    justify-content: center;
+    opacity: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    transition: background-image .3s ease;
+    width: 100%;
+    z-index: 1;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+
+.link-underline {
+    border-bottom: 1px solid #a9a9a9;
+    transition: all .5s;
+    &:hover {
+        text-decoration: none;
+        background-color: #a9a9a9;
+        color: #000!important;
+    }
+}
+
+
+
+.insta-image {
+    &:hover {
+        .img-backdrop {
+            opacity: 1;
+            display: flex;
+        }
+    }
+}
+
+.insta-caption {
+    margin: 0 auto;
+    color: #fff;
+}
+
+// END OF INSTAGRAM CSS
